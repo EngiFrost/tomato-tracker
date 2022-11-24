@@ -11,29 +11,37 @@ export const TrackerWrapper = styled.div`
   max-width: 1200px;
 `;
 
-export const Title = styled.div`
+const Font = styled.div`
   color: white;
+  font-weight: 600;
+`;
+
+export const Title = styled(Font)`
   font-size: 34px;
   line-height: 34px;
-  font-weight: 600;
 `;
 
 export const InfoSection = styled.div`
   display: flex;
-  justify-content: space-evenly;
+  align-items: center;
 `;
 
-export const Timer = styled.div``;
+export const Timer = styled(Font)`
+  font-size: 80px;
+  line-height: 80px;
+`;
 
 export const Button = styled.button<{ label: string }>`
   padding: 10px;
   border: 1px dashed white;
   border-radius: 15px;
   width: fit-content;
+  height: fit-content;
 
   font-size: 18px;
   line-height: 18px;
   font-weight: 600;
+  white-space: nowrap;
   color: white;
 
   background-color: transparent;
