@@ -49,4 +49,11 @@ export const Button = styled.button<{ label: string }>`
   }
 `;
 
-export const ActionBtn = styled.button``;
+export const ActionBtn = styled.img`
+  height: 100px;
+  width: 100px;
+
+  &:hover {
+    cursor: pointer;
+  }
+`;

@@ -13,6 +13,8 @@ export const Tracker: FC = () => {
   const [mode, setMode] = useState<'tomato' | 'rest'>('tomato');
   const [isPaused, setPaused] = useState<boolean>(true);
 
+  const actionImg = isPaused ? `${process.env.PUBLIC_URL}/svg/play_circle.svg` : `${process.env.PUBLIC_URL}/svg/pause_circle.svg`;
+
   useEffect(() => {
     if (!time) {
       mode === 'tomato' ? setTime(REST_TIME) : setTime(DEFAULT_TIME);
@@ -32,7 +34,7 @@ export const Tracker: FC = () => {
 
       <TimerBar time={time} />
 
-      <S.ActionBtn onClick={() => setPaused(!isPaused)} />
+      <S.ActionBtn src={actionImg} onClick={() => setPaused(!isPaused)} />
     </S.TrackerWrapper>
   );
 };
