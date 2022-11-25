@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from 'react';
-import { TimerBar } from './TimerBar';
+import { TimerBar } from '../TimerBar';
 
 import * as S from './styles';
 import * as H from './helpers';
