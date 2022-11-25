@@ -13,22 +13,34 @@ export const TrackerWrapper = styled.div`
 
 const Font = styled.div`
   color: white;
-  font-weight: 600;
+  line-height: 34px;
 `;
 
 export const Title = styled(Font)`
   font-size: 34px;
-  line-height: 34px;
+  font-weight: 600;
 `;
 
 export const InfoSection = styled.div`
   display: flex;
   align-items: center;
+  width: 70%;
+  min-width: 700px;
 `;
 
 export const Timer = styled(Font)`
   font-size: 80px;
   line-height: 80px;
+
+  display: flex;
+  justify-content: center;
+  flex: 1;
+`;
+
+export const BtnWrapper = styled.div`
+  display: flex;
+  flex: 1;
+  justify-content: center;
 `;
 
 export const Button = styled.button<{ label: string }>`

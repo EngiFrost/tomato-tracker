@@ -27,9 +27,15 @@ export const Tracker: FC = () => {
       <S.Title>Tomato Tracker!</S.Title>
 
       <S.InfoSection>
-        <S.Button label={`Skip ${mode}`} />
+        <S.BtnWrapper>
+          <S.Button label={`Skip ${mode}`} />
+        </S.BtnWrapper>
+
         <S.Timer>{H.formatTime(time)}</S.Timer>
-        <S.Button label="Settings" />
+
+        <S.BtnWrapper>
+          <S.Button label="Settings" />
+        </S.BtnWrapper>
       </S.InfoSection>
 
       <TimerBar time={time} />

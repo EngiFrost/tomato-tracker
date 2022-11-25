@@ -11,7 +11,7 @@ export const TimerBar = ({ time }: Props) => {
   return (
     <S.Wrapper offset={time}>
       {bars.map((value) => (
-        <S.Bar isEnlarged={value % 5 === 0} />
+        <S.Bar key={value} isEnlarged={value % 5 === 0} />
       ))}
     </S.Wrapper>
   );
