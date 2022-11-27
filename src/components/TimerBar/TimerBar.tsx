@@ -10,9 +10,15 @@ export const TimerBar = ({ time }: Props) => {
 
   return (
     <S.Wrapper offset={time}>
-      {bars.map((value) => (
-        <S.Bar key={value} isEnlarged={value % 5 === 0} />
-      ))}
+      {bars.map((value) => {
+        const isEnlarged = value % 5 === 0;
+        return (
+          <>
+            <S.Bar key={value} isEnlarged={isEnlarged} />
+            {isEnlarged && <S.Minutes>{value}</S.Minutes>}
+          </>
+        );
+      })}
     </S.Wrapper>
   );
 };

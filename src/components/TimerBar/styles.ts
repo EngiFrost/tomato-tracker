@@ -16,6 +16,10 @@ export const Bar = styled.div<{ isEnlarged: boolean }>`
         `}
 `;
 
+export const Minutes = styled.div`
+  // TODO: do more
+`;
+
 export const Wrapper = styled.div<{ offset: number }>`
   display: flex;
   align-items: flex-end;
