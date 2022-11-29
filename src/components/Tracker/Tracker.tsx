@@ -5,7 +5,7 @@ import * as S from './styles';
 import * as H from './helpers';
 
 // TODO: get this values from input
-const DEFAULT_TIME = 5 * 60;
+const DEFAULT_TIME = 25 * 60;
 const REST_TIME = 5 * 60;
 
 export const Tracker: FC = () => {
