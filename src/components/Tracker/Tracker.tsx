@@ -22,6 +22,16 @@ export const Tracker: FC = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [time]);
 
+  useEffect(() => {
+    let interval: NodeJS.Timer;
+
+    if (!isPaused) {
+      interval = setInterval(() => setTime((prevTime) => prevTime - 1), 1000);
+    }
+
+    return () => clearInterval(interval);
+  }, [isPaused]);
+
   const skipAction = () => {
     const nextMode = mode === 'tomato' ? 'rest' : 'tomato';
     setMode(nextMode);
