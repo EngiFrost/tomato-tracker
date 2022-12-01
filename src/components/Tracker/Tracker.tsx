@@ -3,6 +3,7 @@ import { TimerBar } from '../TimerBar';
 
 import * as S from './styles';
 import * as H from './helpers';
+import { SettingsDrawer } from '../SettingsDrawer';
 
 // TODO: get this values from input
 const DEFAULT_TOMATO_TIME = 25 * 60;
@@ -12,6 +13,7 @@ export const Tracker: FC = () => {
   const [time, setTime] = useState<number>(DEFAULT_TOMATO_TIME);
   const [mode, setMode] = useState<'tomato' | 'rest'>('tomato');
   const [isPaused, setPaused] = useState<boolean>(true);
+  const [isDrawerVisible, setDrawerVisible] = useState<boolean>(false);
 
   const actionImg = isPaused ? `${process.env.PUBLIC_URL}/svg/play_circle.svg` : `${process.env.PUBLIC_URL}/svg/pause_circle.svg`;
 
@@ -39,24 +41,28 @@ export const Tracker: FC = () => {
   };
 
   return (
-    <S.TrackerWrapper>
-      <S.Title>Tomato Tracker!</S.Title>
+    <>
+      <S.TrackerWrapper>
+        <S.Title>Tomato Tracker!</S.Title>
 
-      <S.InfoSection>
-        <S.BtnWrapper>
-          <S.Button label={`Skip ${mode}`} onClick={skipAction} />
-        </S.BtnWrapper>
+        <S.InfoSection>
+          <S.BtnWrapper>
+            <S.Button label={`Skip ${mode}`} onClick={skipAction} />
+          </S.BtnWrapper>
 
-        <S.Timer>{H.formatTime(time)}</S.Timer>
+          <S.Timer>{H.formatTime(time)}</S.Timer>
 
-        <S.BtnWrapper>
-          <S.Button label="Settings" />
-        </S.BtnWrapper>
-      </S.InfoSection>
+          <S.BtnWrapper>
+            <S.Button label="Settings" onClick={() => setDrawerVisible((prevState) => !prevState)} />
+          </S.BtnWrapper>
+        </S.InfoSection>
 
-      <TimerBar time={time} />
+        <TimerBar time={time} />
 
-      <S.ActionBtn src={actionImg} onClick={() => setPaused(!isPaused)} />
-    </S.TrackerWrapper>
+        <S.ActionBtn src={actionImg} onClick={() => setPaused(!isPaused)} />
+      </S.TrackerWrapper>
+
+      <SettingsDrawer isVisible={isDrawerVisible} />
+    </>
   );
 };
