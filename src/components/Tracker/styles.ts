@@ -1,3 +1,4 @@
+import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 
 export const TrackerWrapper = styled.div`
@@ -43,9 +44,21 @@ export const BtnWrapper = styled.div`
   justify-content: center;
 `;
 
-export const Button = styled.button<{ label: string }>`
+const activeButtonStyles = css`
+  text-decoration: underline;
+  background-color: white;
+  color: tomato;
+  cursor: pointer;
+`;
+
+type ButtonProps = {
+  label: string;
+  isActive?: boolean;
+};
+
+export const Button = styled.button<ButtonProps>`
   padding: 10px;
-  border: 1px dashed white;
+  border: 2px dashed white;
   border-radius: 15px;
   width: fit-content;
   height: fit-content;
@@ -58,14 +71,14 @@ export const Button = styled.button<{ label: string }>`
 
   background-color: transparent;
 
+  ${(p) => p.isActive && activeButtonStyles}
+
   &::before {
     content: '${(p) => p.label}';
   }
 
   &:hover {
-    text-decoration: underline;
-
-    cursor: pointer;
+    ${activeButtonStyles}
   }
 `;
 

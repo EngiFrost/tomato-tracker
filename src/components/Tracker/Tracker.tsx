@@ -53,7 +53,7 @@ export const Tracker: FC = () => {
           <S.Timer>{H.formatTime(time)}</S.Timer>
 
           <S.BtnWrapper>
-            <S.Button label="Settings" onClick={() => setDrawerVisible((prevState) => !prevState)} />
+            <S.Button label="Settings" onClick={() => setDrawerVisible((prevState) => !prevState)} isActive={isDrawerVisible} />
           </S.BtnWrapper>
         </S.InfoSection>
 
