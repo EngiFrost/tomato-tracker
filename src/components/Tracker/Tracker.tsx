@@ -4,6 +4,7 @@ import { TimerBar } from '../TimerBar';
 import * as S from './styles';
 import * as H from './helpers';
 import { SettingsDrawer } from '../SettingsDrawer';
+import { Button } from '../Button';
 
 // TODO: get this values from input
 const DEFAULT_TOMATO_TIME = 25 * 60;
@@ -40,8 +41,6 @@ export const Tracker: FC = () => {
     setTime(nextMode === 'tomato' ? DEFAULT_TOMATO_TIME : DEFAULT_REST_TIME);
   };
 
-  // TODO: move btns to separate folder
-
   return (
     <>
       <S.TrackerWrapper>
@@ -49,13 +48,13 @@ export const Tracker: FC = () => {
 
         <S.InfoSection>
           <S.BtnWrapper>
-            <S.Button label={`Skip ${mode}`} onClick={skipAction} />
+            <Button label={`Skip ${mode}`} onClick={skipAction} />
           </S.BtnWrapper>
 
           <S.Timer>{H.formatTime(time)}</S.Timer>
 
           <S.BtnWrapper>
-            <S.Button label="Settings" onClick={() => setDrawerVisible((prevState) => !prevState)} isActive={isDrawerVisible} />
+            <Button label="Settings" onClick={() => setDrawerVisible((prevState) => !prevState)} isActive={isDrawerVisible} />
           </S.BtnWrapper>
         </S.InfoSection>
 
