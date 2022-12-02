@@ -40,6 +40,8 @@ export const Tracker: FC = () => {
     setTime(nextMode === 'tomato' ? DEFAULT_TOMATO_TIME : DEFAULT_REST_TIME);
   };
 
+  // TODO: move btns to separate folder
+
   return (
     <>
       <S.TrackerWrapper>
