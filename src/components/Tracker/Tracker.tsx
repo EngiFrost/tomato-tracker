@@ -5,13 +5,13 @@ import * as S from './styles';
 import * as H from './helpers';
 import { SettingsDrawer } from '../SettingsDrawer';
 import { Button } from '../Button';
+import { observer } from 'mobx-react-lite';
+import { tomatoStore } from '../../store/tomatoStore';
 
-// TODO: get this values from input
-const DEFAULT_TOMATO_TIME = 25 * 60;
-const DEFAULT_REST_TIME = 5 * 60;
+// TODO: get this values from store!
 
-export const Tracker: FC = () => {
-  const [time, setTime] = useState<number>(DEFAULT_TOMATO_TIME);
+export const Tracker: FC = observer(() => {
+  const [time, setTime] = useState<number>(tomatoStore.tomatoDuration);
   const [mode, setMode] = useState<'tomato' | 'rest'>('tomato');
   const [isPaused, setPaused] = useState<boolean>(true);
   const [isDrawerVisible, setDrawerVisible] = useState<boolean>(false);
@@ -20,7 +20,7 @@ export const Tracker: FC = () => {
 
   useEffect(() => {
     if (!time) {
-      mode === 'tomato' ? setTime(DEFAULT_REST_TIME) : setTime(DEFAULT_TOMATO_TIME);
+      mode === 'tomato' ? setTime(tomatoStore.restDuration) : setTime(tomatoStore.tomatoDuration);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [time]);
@@ -38,8 +38,10 @@ export const Tracker: FC = () => {
   const skipAction = () => {
     const nextMode = mode === 'tomato' ? 'rest' : 'tomato';
     setMode(nextMode);
-    setTime(nextMode === 'tomato' ? DEFAULT_TOMATO_TIME : DEFAULT_REST_TIME);
+    setTime(nextMode === 'tomato' ? tomatoStore.tomatoDuration : tomatoStore.restDuration);
   };
+
+  // TODO: tomatoes counter
 
   return (
     <>
@@ -66,4 +68,4 @@ export const Tracker: FC = () => {
       <SettingsDrawer isVisible={isDrawerVisible} />
     </>
   );
-};
+});
