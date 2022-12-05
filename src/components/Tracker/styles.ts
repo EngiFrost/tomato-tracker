@@ -51,3 +51,10 @@ export const ActionBtn = styled.img`
     cursor: pointer;
   }
 `;
+
+export const Counter = styled(Font)`
+  position: absolute;
+  bottom: 5%;
+
+  font-size: 20px;
+`;

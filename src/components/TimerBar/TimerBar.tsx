@@ -18,7 +18,7 @@ export const TimerBar = ({ time }: Props) => {
           const isLessTen = value < 10;
 
           return (
-            <S.Container>
+            <S.Container key={value}>
               <S.Bar key={value} isEnlarged={isEnlarged} />
               {isEnlarged && <S.Minutes isLessTen={isLessTen}>{value}</S.Minutes>}
             </S.Container>
