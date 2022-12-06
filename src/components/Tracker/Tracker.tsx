@@ -10,8 +10,6 @@ import * as S from './styles';
 import * as H from './helpers';
 
 export const Tracker: FC = observer(() => {
-  const [time, setTime] = useState<number>(tomatoStore.tomatoDuration); // TODO: move to store
-  const [mode, setMode] = useState<'tomato' | 'rest'>('tomato'); // TODO: move to store
   const [isPaused, setPaused] = useState<boolean>(true); // TODO: move to store
   const [isDrawerVisible, setDrawerVisible] = useState<boolean>(false); // TODO: move to store
 
@@ -19,38 +17,22 @@ export const Tracker: FC = observer(() => {
 
   // zero time handler
   useEffect(() => {
-    if (!time) {
-      if (mode === 'tomato') {
-        setTime(tomatoStore.restDuration);
-      } else {
-        setTime(tomatoStore.tomatoDuration);
-        tomatoStore.increaseTomatoesCount();
-      }
+    if (!tomatoStore.time) {
+      tomatoStore.handleZeroTime();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [time]);
+  }, [tomatoStore.time]);
 
   // main counting function
   useEffect(() => {
     let interval: NodeJS.Timer;
 
     if (!isPaused) {
-      interval = setInterval(() => setTime((prevTime) => prevTime - 1), 1000);
+      interval = setInterval(() => tomatoStore.reduceTime(), 1000);
     }
 
     return () => clearInterval(interval);
   }, [isPaused]);
-
-  const skipAction = () => {
-    const nextMode = mode === 'tomato' ? 'rest' : 'tomato';
-
-    setMode(nextMode);
-    setTime(nextMode === 'tomato' ? tomatoStore.tomatoDuration : tomatoStore.restDuration);
-
-    if (nextMode === 'tomato') {
-      tomatoStore.increaseTomatoesCount();
-    }
-  };
 
   return (
     <>
@@ -59,17 +41,17 @@ export const Tracker: FC = observer(() => {
 
         <S.InfoSection>
           <S.BtnWrapper>
-            <Button label={`Skip ${mode}`} onClick={skipAction} />
+            <Button label={`Skip ${tomatoStore.mode}`} onClick={() => tomatoStore.changeMode(tomatoStore.mode)} isRest={tomatoStore.mode === 'rest'} />
           </S.BtnWrapper>
 
-          <S.Timer>{H.formatTime(time)}</S.Timer>
+          <S.Timer>{H.formatTime(tomatoStore.time)}</S.Timer>
 
           <S.BtnWrapper>
-            <Button label="Settings" onClick={() => setDrawerVisible((prevState) => !prevState)} isActive={isDrawerVisible} />
+            <Button label="Settings" onClick={() => setDrawerVisible((prevState) => !prevState)} isActive={isDrawerVisible} isRest={tomatoStore.mode === 'rest'} />
           </S.BtnWrapper>
         </S.InfoSection>
 
-        <TimerBar time={time} />
+        <TimerBar time={tomatoStore.time} />
 
         <S.ActionBtn src={actionImg} onClick={() => setPaused(!isPaused)} />
 

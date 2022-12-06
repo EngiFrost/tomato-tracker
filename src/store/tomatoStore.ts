@@ -12,6 +12,8 @@ export class TomatoStore {
   tomatoDuration: number = DEFAULT_TOMATO_TIME;
   restDuration: number = DEFAULT_REST_TIME;
   tomatoesCount: number = 0;
+  time: number = this.tomatoDuration;
+  mode: 'tomato' | 'rest' = 'tomato';
 
   setTomatoDuration(minutes: number) {
     this.tomatoDuration = minutes * MINUTE;
@@ -23,6 +25,31 @@ export class TomatoStore {
 
   increaseTomatoesCount() {
     this.tomatoesCount += 1;
+  }
+
+  reduceTime() {
+    this.time -= 1;
+  }
+
+  changeMode(mode: 'tomato' | 'rest') {
+    if (mode === 'rest') {
+      this.mode = 'tomato';
+      this.time = this.tomatoDuration;
+      this.increaseTomatoesCount();
+      return;
+    }
+
+    this.mode = 'rest';
+    this.time = this.restDuration;
+  }
+
+  handleZeroTime() {
+    if (this.mode === 'tomato') {
+      this.time = this.restDuration;
+    } else {
+      this.time = this.tomatoDuration;
+      this.increaseTomatoesCount();
+    }
   }
 }
 
