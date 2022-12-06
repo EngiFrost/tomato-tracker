@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
+import { BG_COLOR_REST, BG_COLOR_TOMATO } from '../../ui/colors';
 
-export const Wrapper = styled.div`
+export const Wrapper = styled.div<{ isRest: boolean }>`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -11,5 +12,5 @@ export const Wrapper = styled.div`
 
   position: relative;
 
-  background-color: tomato;
+  background-color: ${(p) => (p.isRest ? BG_COLOR_REST : BG_COLOR_TOMATO)};
 `;
