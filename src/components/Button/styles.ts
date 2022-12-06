@@ -1,15 +1,16 @@
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
+import { BG_COLOR_REST, BG_COLOR_TOMATO } from '../../ui/colors';
 
 const activeButtonStyles = css`
   text-decoration: underline;
   background-color: white;
-  color: tomato;
   cursor: pointer;
 `;
 
 type ButtonProps = {
   isActive?: boolean;
+  isRest?: boolean;
 };
 
 export const Button = styled.button<ButtonProps>`
@@ -31,5 +32,6 @@ export const Button = styled.button<ButtonProps>`
 
   &:hover {
     ${activeButtonStyles}
+    ${(p) => (p.isRest ? `color: ${BG_COLOR_REST};` : `color: ${BG_COLOR_TOMATO};`)}
   }
 `;

@@ -4,6 +4,7 @@ import * as S from './styles';
 type Props = {
   label: string;
   isActive?: boolean;
+  isRest?: boolean;
   onClick?: () => void;
 };
 
