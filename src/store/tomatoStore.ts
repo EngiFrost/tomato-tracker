@@ -42,15 +42,6 @@ export class TomatoStore {
     this.mode = 'rest';
     this.time = this.restDuration;
   }
-
-  handleZeroTime() {
-    if (this.mode === 'tomato') {
-      this.time = this.restDuration;
-    } else {
-      this.time = this.tomatoDuration;
-      this.increaseTomatoesCount();
-    }
-  }
 }
 
 export const tomatoStore = new TomatoStore();

@@ -18,7 +18,7 @@ export const Tracker: FC = observer(() => {
   // zero time handler
   useEffect(() => {
     if (!tomatoStore.time) {
-      tomatoStore.handleZeroTime();
+      tomatoStore.changeMode(tomatoStore.mode);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [tomatoStore.time]);
