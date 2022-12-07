@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
-import { BG_COLOR_REST, BG_COLOR_TOMATO } from '../../ui/colors';
+import { BG_COLOR_REST, BG_COLOR_TOMATO } from '../colors';
 
 const activeButtonStyles = css`
   text-decoration: underline;

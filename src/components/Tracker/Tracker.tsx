@@ -2,7 +2,7 @@ import { FC, useEffect, useState } from 'react';
 import { TimerBar } from '../TimerBar';
 
 import { SettingsDrawer } from '../SettingsDrawer';
-import { Button } from '../Button';
+import { Button } from '../../ui/Button';
 import { observer } from 'mobx-react-lite';
 import { tomatoStore } from '../../store/tomatoStore';
 
@@ -34,6 +34,22 @@ export const Tracker: FC = observer(() => {
     return () => clearInterval(interval);
   }, [isPaused]);
 
+  // space bar keydown handler
+  useEffect(() => {
+    window.addEventListener('keydown', handleKeyDown);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const handleKeyDown = (event: KeyboardEvent) => {
+    if (event.key === ' ') {
+      handleAction();
+    }
+  };
+
+  const handleAction = () => {
+    setPaused((isPaused) => !isPaused);
+  };
+
   return (
     <>
       <S.TrackerWrapper>
@@ -53,7 +69,7 @@ export const Tracker: FC = observer(() => {
 
         <TimerBar time={tomatoStore.time} />
 
-        <S.ActionBtn src={actionImg} onClick={() => setPaused(!isPaused)} />
+        <S.ActionBtn src={actionImg} onClick={handleAction} />
 
         <S.Counter>{`Tomatoes today: ${tomatoStore.tomatoesCount}`}</S.Counter>
       </S.TrackerWrapper>
