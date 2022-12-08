@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import { SettingsForm } from '../SettingsForm';
 import * as S from './styles';
 
 type Props = {
@@ -6,5 +7,11 @@ type Props = {
 };
 
 export const SettingsDrawer: FC<Props> = ({ isVisible }) => {
-  return isVisible ? <S.Drawer>SettingsDrawer</S.Drawer> : <div></div>;
+  return isVisible ? (
+    <S.Drawer>
+      <SettingsForm />
+    </S.Drawer>
+  ) : (
+    <></>
+  );
 };
