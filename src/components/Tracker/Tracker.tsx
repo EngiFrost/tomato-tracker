@@ -1,7 +1,7 @@
 import { FC, useEffect, useState } from 'react';
 import { TimerBar } from '../TimerBar';
 
-import { SettingsDrawer } from '../SettingsDrawer';
+import { SettingsDrawer } from '../Settings';
 import { Button } from '../../ui/Button';
 import { observer } from 'mobx-react-lite';
 import { tomatoStore } from '../../store/tomatoStore';
@@ -74,7 +74,7 @@ export const Tracker: FC = observer(() => {
         <S.Counter>{`Tomatoes today: ${tomatoStore.tomatoesCount}`}</S.Counter>
       </S.TrackerWrapper>
 
-      <SettingsDrawer isVisible={isDrawerVisible} />
+      {isDrawerVisible && <SettingsDrawer />}
     </>
   );
 });
