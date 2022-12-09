@@ -1,38 +1,36 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect } from 'react';
 import { TimerBar } from '../TimerBar';
 
 import { SettingsDrawer } from '../Settings';
 import { Button } from '../../ui/Button';
 import { observer } from 'mobx-react-lite';
-import { tomatoStore } from '../../store/tomatoStore';
+import { tomatoStore as TS } from '../../store/tomatoStore';
 
 import * as S from './styles';
 import * as H from './helpers';
 
 export const Tracker: FC = observer(() => {
-  const [isPaused, setPaused] = useState<boolean>(true); // TODO: move to store
-  const [isDrawerVisible, setDrawerVisible] = useState<boolean>(false); // TODO: move to store
-
-  const actionImg = isPaused ? `${process.env.PUBLIC_URL}/svg/play_circle.svg` : `${process.env.PUBLIC_URL}/svg/pause_circle.svg`;
+  const actionImg = TS.isPaused ? `${process.env.PUBLIC_URL}/svg/play_circle.svg` : `${process.env.PUBLIC_URL}/svg/pause_circle.svg`;
 
   // zero time handler
   useEffect(() => {
-    if (!tomatoStore.time) {
-      tomatoStore.changeMode(tomatoStore.mode);
+    if (!TS.time) {
+      TS.changeMode(TS.mode);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [tomatoStore.time]);
+  }, [TS.time]);
 
   // main counting function
   useEffect(() => {
     let interval: NodeJS.Timer;
 
-    if (!isPaused) {
-      interval = setInterval(() => tomatoStore.reduceTime(), 1000);
+    if (!TS.isPaused) {
+      interval = setInterval(() => TS.reduceTime(), 1000);
     }
 
     return () => clearInterval(interval);
-  }, [isPaused]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [TS.isPaused]);
 
   // space bar keydown handler
   useEffect(() => {
@@ -42,12 +40,8 @@ export const Tracker: FC = observer(() => {
 
   const handleKeyDown = (event: KeyboardEvent) => {
     if (event.key === ' ') {
-      handleAction();
+      TS.togglePause(TS.isPaused);
     }
-  };
-
-  const handleAction = () => {
-    setPaused((isPaused) => !isPaused);
   };
 
   return (
@@ -57,24 +51,24 @@ export const Tracker: FC = observer(() => {
 
         <S.InfoSection>
           <S.BtnWrapper>
-            <Button label={`Skip ${tomatoStore.mode}`} onClick={() => tomatoStore.changeMode(tomatoStore.mode)} isRest={tomatoStore.mode === 'rest'} />
+            <Button label={`Skip ${TS.mode}`} onClick={() => TS.changeMode(TS.mode)} isRest={TS.mode === 'rest'} />
           </S.BtnWrapper>
 
-          <S.Timer>{H.formatTime(tomatoStore.time)}</S.Timer>
+          <S.Timer>{H.formatTime(TS.time)}</S.Timer>
 
           <S.BtnWrapper>
-            <Button label="Settings" onClick={() => setDrawerVisible((prevState) => !prevState)} isActive={isDrawerVisible} isRest={tomatoStore.mode === 'rest'} />
+            <Button label="Settings" onClick={() => TS.toggleDrawer(TS.isDrawerVisible)} isActive={TS.isDrawerVisible} isRest={TS.mode === 'rest'} />
           </S.BtnWrapper>
         </S.InfoSection>
 
-        <TimerBar time={tomatoStore.time} />
+        <TimerBar time={TS.time} />
 
-        <S.ActionBtn src={actionImg} onClick={handleAction} />
+        <S.ActionBtn src={actionImg} onClick={() => TS.togglePause(TS.isPaused)} />
 
-        <S.Counter>{`Tomatoes today: ${tomatoStore.tomatoesCount}`}</S.Counter>
+        <S.Counter>{`Tomatoes today: ${TS.tomatoesCount}`}</S.Counter>
       </S.TrackerWrapper>
 
-      {isDrawerVisible && <SettingsDrawer />}
+      {TS.isDrawerVisible && <SettingsDrawer />}
     </>
   );
 });

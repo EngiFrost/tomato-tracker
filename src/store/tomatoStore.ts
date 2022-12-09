@@ -4,6 +4,7 @@ const MINUTE = 60;
 const DEFAULT_TOMATO_TIME = 25 * MINUTE;
 const DEFAULT_REST_TIME = 5 * MINUTE;
 
+// TODO: finite state machine refactoring!
 export class TomatoStore {
   constructor() {
     makeAutoObservable(this);
@@ -14,6 +15,8 @@ export class TomatoStore {
   tomatoesCount: number = 0;
   time: number = this.tomatoDuration;
   mode: 'tomato' | 'rest' = 'tomato';
+  isPaused: boolean = true;
+  isDrawerVisible: boolean = false;
 
   setTomatoDuration(minutes: number) {
     this.tomatoDuration = minutes * MINUTE;
@@ -31,6 +34,7 @@ export class TomatoStore {
     this.time -= 1;
   }
 
+  // FIXME: do we need args here?
   changeMode(mode: 'tomato' | 'rest') {
     if (mode === 'rest') {
       this.mode = 'tomato';
@@ -41,6 +45,16 @@ export class TomatoStore {
 
     this.mode = 'rest';
     this.time = this.restDuration;
+  }
+
+  // FIXME: do we need args here?
+  toggleDrawer(drawerState: boolean) {
+    this.isDrawerVisible = !drawerState;
+  }
+
+  // FIXME: do we need args here?
+  togglePause(pauseState: boolean) {
+    this.isPaused = !pauseState;
   }
 }
 
