@@ -8,6 +8,13 @@ const activeButtonStyles = css`
   cursor: pointer;
 `;
 
+const getActiveStyles = (isRest?: boolean) => {
+  return css`
+    ${activeButtonStyles}
+    color: ${isRest ? BG_COLOR_REST : BG_COLOR_TOMATO};
+  `;
+};
+
 type ButtonProps = {
   isActive?: boolean;
   isRest?: boolean;
@@ -28,10 +35,9 @@ export const Button = styled.button<ButtonProps>`
 
   background-color: transparent;
 
-  ${(p) => p.isActive && activeButtonStyles}
+  ${(p) => p.isActive && getActiveStyles(p.isRest)}
 
   &:hover {
-    ${activeButtonStyles}
-    ${(p) => (p.isRest ? `color: ${BG_COLOR_REST};` : `color: ${BG_COLOR_TOMATO};`)}
+    ${(p) => getActiveStyles(p.isRest)}
   }
 `;
