@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useRef } from 'react';
 import * as S from './styles';
 
 type Props = {
@@ -8,6 +8,17 @@ type Props = {
   onClick?: () => void;
 };
 
-export const Button: FC<Props> = ({ label, ...rest }) => {
-  return <S.Button {...rest}>{label}</S.Button>;
+export const Button: FC<Props> = ({ label, onClick, ...rest }) => {
+  const btnRef: React.RefObject<HTMLButtonElement> = useRef(null)
+
+  const handleClick = () => {
+    btnRef.current?.blur()
+    onClick && onClick();
+  };
+
+  return (
+    <S.Button onClick={handleClick} ref={btnRef} {...rest}>
+      {label}
+    </S.Button>
+  );
 };
