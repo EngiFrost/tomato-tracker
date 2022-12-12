@@ -4,6 +4,8 @@ const MINUTE = 60;
 const DEFAULT_TOMATO_TIME = 25 * MINUTE;
 const DEFAULT_REST_TIME = 5 * MINUTE;
 
+const audio = new Audio(`${process.env.PUBLIC_URL}/audio/action_sound.mp3`)
+
 // TODO: finite state machine refactoring!
 export class TomatoStore {
   constructor() {
@@ -36,6 +38,8 @@ export class TomatoStore {
 
   // FIXME: do we need args here?
   changeMode(mode: 'tomato' | 'rest') {
+    audio.play()
+
     if (mode === 'rest') {
       this.mode = 'tomato';
       this.time = this.tomatoDuration;
