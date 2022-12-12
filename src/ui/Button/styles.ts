@@ -8,6 +8,11 @@ const activeButtonStyles = css`
   cursor: pointer;
 `;
 
+const disabledStyles = css`
+  background-color: gray;
+  border-color: gray;
+`;
+
 const getActiveStyles = (isRest?: boolean) => {
   return css`
     ${activeButtonStyles}
@@ -18,6 +23,7 @@ const getActiveStyles = (isRest?: boolean) => {
 type ButtonProps = {
   isActive?: boolean;
   isRest?: boolean;
+  isDisabled?: boolean;
 };
 
 export const Button = styled.button<ButtonProps>`
@@ -37,7 +43,9 @@ export const Button = styled.button<ButtonProps>`
 
   ${(p) => p.isActive && getActiveStyles(p.isRest)}
 
+  ${(p) => p.isDisabled && disabledStyles}
+
   &:hover {
-    ${(p) => getActiveStyles(p.isRest)}
+    ${(p) => !p.isDisabled && getActiveStyles(p.isRest)}
   }
 `;

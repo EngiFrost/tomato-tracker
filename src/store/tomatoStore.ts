@@ -38,6 +38,8 @@ export class TomatoStore {
 
   // FIXME: do we need args here?
   changeMode(mode: 'tomato' | 'rest') {
+    audio.pause();
+    audio.currentTime = 0;
     audio.play();
 
     if (mode === 'rest') {
@@ -64,7 +66,7 @@ export class TomatoStore {
   updateDuration(tomatoTime: number, restTime: number) {
     this.tomatoDuration = tomatoTime;
     this.restDuration = restTime;
-    this.time = this.mode === 'tomato' ? tomatoTime : restTime
+    this.time = this.mode === 'tomato' ? tomatoTime : restTime;
   }
 }
 

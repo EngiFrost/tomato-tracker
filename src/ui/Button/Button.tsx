@@ -5,6 +5,7 @@ type Props = {
   label: string;
   isActive?: boolean;
   isRest?: boolean;
+  isDisabled?: boolean;
   onClick?: () => void;
 };
 

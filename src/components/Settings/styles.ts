@@ -19,9 +19,9 @@ export const FormWrapper = styled.div`
   gap: 20px;
 `;
 
-export const Row = styled.div`
+export const Row = styled.div<{ aligned?: boolean }>`
   display: flex;
-  justify-content: space-between;
+  justify-content: ${(p) => (p.aligned ? 'center' : 'space-between')};
   align-items: center;
   gap: 20px;
 `;
