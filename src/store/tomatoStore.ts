@@ -28,6 +28,7 @@ export class TomatoStore {
     this.restDuration = minutes * MINUTE;
   }
 
+  // TODO: use local storage to store settings & tomato count
   increaseTomatoesCount() {
     this.tomatoesCount += 1;
   }

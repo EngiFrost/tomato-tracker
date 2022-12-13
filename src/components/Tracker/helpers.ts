@@ -1,3 +1,4 @@
+// TODO: move to utils
 export const formatTime = (time: number): string => {
   const minutes = ~~(time / 60);
   const seconds = time % 60;
