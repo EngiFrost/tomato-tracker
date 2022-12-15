@@ -29,8 +29,10 @@ export const InfoSection = styled.div`
 `;
 
 export const Timer = styled(Font)`
-  font-size: 80px;
-  line-height: 80px;
+  font-size: 100px;
+  line-height: 100px;
+  font-weight: 300;
+  font-family: 'Courier';
 
   display: flex;
   justify-content: center;
@@ -44,8 +46,8 @@ export const BtnWrapper = styled.div`
 `;
 
 export const ActionBtn = styled.img`
-  height: 100px;
-  width: 100px;
+  height: 120px;
+  width: 120px;
 
   &:hover {
     cursor: pointer;
