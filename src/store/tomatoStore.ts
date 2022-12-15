@@ -1,4 +1,3 @@
-import dayjs from 'dayjs';
 import { makeAutoObservable } from 'mobx';
 
 const MINUTE = 60;
@@ -77,7 +76,9 @@ export class TomatoStore {
   updateDuration(tomatoTime: number, restTime: number) {
     this.tomatoDuration = tomatoTime;
     this.restDuration = restTime;
-    this.time = this.mode === 'tomato' ? tomatoTime : restTime;
+    const newTime = this.mode === 'tomato' ? tomatoTime : restTime;
+    this.zeroTime = Date.now() + newTime * 1000;
+    this.time = newTime;
   }
 }
 
