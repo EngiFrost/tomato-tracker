@@ -25,11 +25,11 @@ export const Tracker: FC = observer(() => {
     let interval: NodeJS.Timer;
 
     if (!TS.isPaused) {
-      interval = setInterval(() => TS.reduceTime(), 1000);
+      interval = setInterval(() => TS.setTime(Math.round((TS.zeroTime - Date.now()) / 1000)), 1000);
     }
 
     return () => clearInterval(interval);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [TS.isPaused]);
 
   // space bar keydown handler

@@ -1,3 +1,4 @@
+import dayjs from 'dayjs';
 import { makeAutoObservable } from 'mobx';
 
 const MINUTE = 60;
@@ -19,6 +20,7 @@ export class TomatoStore {
   mode: 'tomato' | 'rest' = 'tomato';
   isPaused: boolean = true;
   isDrawerVisible: boolean = false;
+  zeroTime: number = 0;
 
   setTomatoDuration(minutes: number) {
     this.tomatoDuration = minutes * MINUTE;
@@ -33,8 +35,8 @@ export class TomatoStore {
     this.tomatoesCount += 1;
   }
 
-  reduceTime() {
-    this.time -= 1;
+  setTime(time: number) {
+    this.time = time;
   }
 
   // FIXME: do we need args here?
@@ -43,15 +45,19 @@ export class TomatoStore {
     audio.currentTime = 0;
     audio.play();
 
+    let newTime = 0;
+
     if (mode === 'rest') {
       this.mode = 'tomato';
-      this.time = this.tomatoDuration;
+      newTime = this.tomatoDuration;
       this.increaseTomatoesCount();
-      return;
+    } else {
+      this.mode = 'rest';
+      newTime = this.restDuration;
     }
 
-    this.mode = 'rest';
-    this.time = this.restDuration;
+    this.zeroTime = Date.now() + newTime * 1000;
+    this.time = newTime;
   }
 
   // FIXME: do we need args here?
@@ -61,6 +67,10 @@ export class TomatoStore {
 
   // FIXME: do we need args here?
   togglePause(pauseState: boolean) {
+    if (pauseState) {
+      this.zeroTime = Date.now() + this.time * 1000;
+    }
+
     this.isPaused = !pauseState;
   }
 
