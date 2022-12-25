@@ -14,7 +14,7 @@ export const Tracker: FC = observer(() => {
 
   // zero time handler
   useEffect(() => {
-    if (!TS.time) {
+    if (TS.time <= 0) {
       TS.changeMode(TS.mode);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
