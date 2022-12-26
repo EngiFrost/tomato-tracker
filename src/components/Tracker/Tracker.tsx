@@ -9,6 +9,7 @@ import { tomatoStore as TS } from '../../store/tomatoStore';
 import * as S from './styles';
 import * as H from './helpers';
 
+// TODO: refactoring
 export const Tracker: FC = observer(() => {
   const actionImg = TS.isPaused ? `${process.env.PUBLIC_URL}/svg/play_circle.svg` : `${process.env.PUBLIC_URL}/svg/pause_circle.svg`;
 
