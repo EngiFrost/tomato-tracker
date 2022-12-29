@@ -9,7 +9,6 @@ import { tomatoStore as TS } from '../../store/tomatoStore';
 import * as S from './styles';
 import * as H from './helpers';
 
-// TODO: refactoring ring ring ring
 export const Tracker: FC = observer(() => {
   const actionImg = TS.isPaused ? `${process.env.PUBLIC_URL}/svg/play_circle.svg` : `${process.env.PUBLIC_URL}/svg/pause_circle.svg`;
 
@@ -18,7 +17,6 @@ export const Tracker: FC = observer(() => {
     if (TS.time <= 0) {
       TS.changeMode(TS.mode);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [TS.time]);
 
   // main counting function
@@ -30,13 +28,11 @@ export const Tracker: FC = observer(() => {
     }
 
     return () => clearInterval(interval);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [TS.isPaused]);
 
   // space bar keydown handler
   useEffect(() => {
     window.addEventListener('keydown', handleKeyDown);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleKeyDown = (event: KeyboardEvent) => {
